@@ -1,0 +1,44 @@
+package main
+
+templ Index() {
+	@Base() {
+		<form id="username-form" action="check-username-available" method="post">
+			<label for="username">Username:</label>
+			<input type="text" id="username" name="username" placeholder="Enter your username" required />
+			<button type="submit">Check Availability</button>
+		</form>
+	}
+}
+
+templ CheckUsernameAvailability(username string, taken bool) {
+	@Base() {
+		if taken {
+			<div>
+				Username '{username}' is not available.
+			</div>
+		} else {
+			<div>
+				Username '{username}' is available.
+			</div>
+		}
+	}
+}
+
+templ ErrorPage(err string) {
+	@Base() {
+		<div>Error: {err}</div>
+	}
+}
+
+templ Base() {
+	<html lang="en">
+		<head>
+			<meta charset="UTF-8" />
+			<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.classless.min.css" />
+			<title>Discord Username Checker</title>
+		</head>
+		<body>
+			{children...}
+		</body>
+	</html>
+}
